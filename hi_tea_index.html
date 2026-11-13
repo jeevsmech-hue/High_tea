@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover Hi-Tea – The Taste of The Nilgiris. Explore Nilgiri Black Tea and Premium Tea Powder from Kotagiri.">
+  <meta name="theme-color" content="#304b3b">
+  <title>Hi-Tea | The Taste of The Nilgiris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #304b3b;
+      --green-light: #58745e;
+      --cream: #f7f4ec;
+      --paper: #fffdf8;
+      --ink: #242a25;
+      --muted: #687168;
+      --gold: #c6a45b;
+      --line: #e7e2d6;
+      --shadow: 0 18px 45px rgba(35, 48, 38, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    .top-note {
+      padding: 8px 16px;
+      text-align: center;
+      color: #fff;
+      background: var(--green);
+      font-size: .82rem;
+      letter-spacing: .04em;
+    }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 6%;
+      background: rgba(255,253,248,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+    .brand {
+      color: var(--green);
+      font: 700 2rem/1 "Playfair Display", serif;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .brand small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font: 600 .58rem/1.2 "DM Sans", sans-serif;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: .92rem;
+      font-weight: 600;
+    }
+    .nav-links a:hover { color: var(--green-light); }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 12px 22px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--green);
+      color: white;
+      font: 700 .94rem "DM Sans", sans-serif;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .2s, background .2s;
+    }
+    .button:hover { background: var(--green-light); transform: translateY(-2px); }
+    .button.gold { background: var(--gold); color: #20251f; }
+    .button.gold:hover { background: #d5b66e; }
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: transparent;
+      color: var(--green);
+      font-size: 1.7rem;
+      cursor: pointer;
+    }
+    .hero {
+      min-height: 610px;
+      display: grid;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(18,31,23,.78), rgba(18,31,23,.35)),
+        url("https://images.unsplash.com/photo-1470087167738-6aa485ff65dc?auto=format&fit=crop&w=2000&q=85") center/cover no-repeat;
+      color: white;
+    }
+    .hero-content { width: min(720px, 88%); margin-left: 8%; padding: 90px 0; }
+    .eyebrow {
+      margin: 0 0 14px;
+      color: #e4cf9c;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 { font-family: "Playfair Display", serif; }
+    .hero h1 { max-width: 680px; margin: 0; font-size: clamp(3.2rem, 7vw, 6.2rem); line-height: 1.02; }
+    .hero h1 span { color: #e4cf9c; }
+    .hero-copy { max-width: 540px; margin: 24px 0 30px; color: rgba(255,255,255,.9); font-size: 1.08rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .intro {
+      padding: 76px 7%;
+      text-align: center;
+      background: var(--paper);
+    }
+    .intro h2, .section-heading { margin: 0 0 14px; color: var(--green); font-size: clamp(2.1rem, 4vw, 3.2rem); }
+    .intro p { max-width: 760px; margin: 0 auto; color: var(--muted); }
+    .products { padding: 82px 7%; }
+    .section-top { max-width: 760px; margin: 0 auto 38px; text-align: center; }
+    .section-top p { margin: 0; color: var(--muted); }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      max-width: 1050px;
+      margin: auto;
+    }
+    .product-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .product-image { width: 100%; height: 270px; display: block; object-fit: cover; }
+    .product-body { padding: 25px; }
+    .product-body h3 { margin: 0 0 8px; color: var(--green); font-size: 1.65rem; }
+    .product-body p { min-height: 54px; margin: 0 0 18px; color: var(--muted); }
+    .product-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .product-meta span { color: var(--green); font-size: .86rem; font-weight: 700; }
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding: 82px 8%;
+      background: #eaece3;
+    }
+    .story img { width: 100%; min-height: 330px; object-fit: cover; border-radius: 20px; box-shadow: var(--shadow); }
+    .story p { color: #566158; }
+    .story h2 { margin: 0 0 15px; color: var(--green); font-size: clamp(2rem, 4vw, 3rem); }
+    .order-section { padding: 84px 7%; background: var(--paper); }
+    .order-layout {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 55px;
+      max-width: 1080px;
+      margin: auto;
+      align-items: start;
+    }
+    .order-copy h2 { margin: 0 0 14px; color: var(--green); font-size: clamp(2.1rem, 4vw, 3rem); }
+    .order-copy p { color: var(--muted); }
+    .contact-line { margin-top: 25px; font-weight: 700; }
+    .order-form {
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--cream);
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { margin-bottom: 17px; }
+    .field.full { grid-column: 1 / -1; }
+    label { display: block; margin-bottom: 7px; color: var(--green); font-size: .88rem; font-weight: 700; }
+    input, select, textarea {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border: 1px solid #d8d6cc;
+      border-radius: 10px;
+      background: white;
+      color: var(--ink);
+      font:  .96rem "DM Sans", sans-serif;
+    }
+    textarea { min-height: 88px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid rgba(88,116,94,.25); border-color: var(--green-light); }
+    .form-note { margin: 12px 0 0; color: var(--muted); font-size: .8rem; }
+    .form-message { min-height: 24px; margin: 12px 0 0; color: var(--green); font-size: .9rem; }
+    .why { padding: 72px 7%; text-align: center; }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1050px; margin: 35px auto 0; }
+    .why-item { padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+    .why-item strong { display: block; margin-bottom: 7px; color: var(--green); }
+    footer { padding: 42px 7%; background: #202a23; color: rgba(255,255,255,.78); text-align: center; }
+    footer strong { color: white; font: 600 1.7rem "Playfair Display", serif; }
+    footer p { margin: 8px 0 0; font-size: .88rem; }
+    .floating-whatsapp {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 30;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      background: #1f9d58;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 8px 25px rgba(0,0,0,.2);
+    }
+    @media (max-width: 760px) {
+      .site-header { padding: 13px 5%; }
+      .brand { font-size: 1.7rem; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        position: absolute; top: 100%; left: 0; right: 0;
+        display: none; flex-direction: column; align-items: stretch;
+        gap: 0; padding: 10px 5% 18px; background: var(--paper);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { display: block; padding: 12px 0; }
+      .site-header > .button { display: none; }
+      .hero { min-height: 570px; background-position: 58% center; }
+      .hero-content { width: 88%; margin: auto; padding: 75px 0; text-align: center; }
+      .hero-actions { justify-content: center; }
+      .product-grid, .story, .order-layout { grid-template-columns: 1fr; }
+      .products, .order-section, .story { padding: 64px 6%; }
+      .product-image { height: 230px; }
+      .story { gap: 25px; }
+      .story img { min-height: 240px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; gap: 0; }
+      .field.full { grid-column: auto; }
+      .order-form { padding: 22px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-note">A taste of the hills, in every cup</div>
+
+  <header class="site-header">
+    <a class="brand" href="#home">Hi-Tea<small>The Taste of The Nilgiris</small></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#products">Our Tea</a>
+      <a href="#story">Our Story</a>
+      <a href="#order">Order</a>
+    </nav>
+    <a class="button" href="#order">Order on WhatsApp</a>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="eyebrow">From the beautiful Nilgiri hills</p>
+        <h1>Good days begin with <span>good tea.</span></h1>
+        <p class="hero-copy">Discover the comforting character of Nilgiri tea. Choose your favourite blend and order directly from Hi-Tea.</p>
+        <div class="hero-actions">
+          <a class="button gold" href="#products">Explore our tea</a>
+          <a class="button" href="#order">Order now</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro">
+      <p class="eyebrow">Welcome to Hi-Tea</p>
+      <h2>The Taste of The Nilgiris</h2>
+      <p>Inspired by the cool hills and tea-growing heritage of the Nilgiris, Hi-Tea brings tea moments closer to home. Explore our available selections and contact us for orders.</p>
+    </section>
+
+    <section class="products" id="products">
+      <div class="section-top">
+        <p class="eyebrow">Made for your everyday cup</p>
+        <h2 class="section-heading">Our Tea Selection</h2>
+        <p>Choose a tea and packet size. We’ll confirm the price and availability with you on WhatsApp.</p>
+      </div>
+      <div class="product-grid">
+        <article class="product-card">
+          <img class="product-image" src="https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&w=1000&q=80" alt="A freshly brewed cup of black tea" loading="lazy">
+          <div class="product-body">
+            <h3>Nilgiri Black Tea</h3>
+            <p>A classic, full-bodied tea for a refreshing everyday brew.</p>
+            <div class="product-meta"><span>250g · 500g · 1kg</span><a class="button" href="#order" data-product="Nilgiri Black Tea">Select tea</a></div>
+          </div>
+        </article>
+        <article class="product-card">
+          <img class="product-image" src="https://images.unsplash.com/photo-1543060895-03f57478a710?auto=format&fit=crop&w=1000&q=80" alt="Tea leaves and a cup of tea" loading="lazy">
+          <div class="product-body">
+            <h3>Premium Tea Powder</h3>
+            <p>A satisfying tea selection for a rich and comforting cup.</p>
+            <div class="product-meta"><span>250g · 500g · 1kg</span><a class="button" href="#order" data-product="Premium Tea Powder">Select tea</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="story" id="story">
+      <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=85" alt="Green tea-growing hills" loading="lazy">
+      <div>
+        <p class="eyebrow">Rooted in the hills</p>
+        <h2>A little taste of the Nilgiris</h2>
+        <p>Hi-Tea celebrates the simple pleasure of a good cup of tea, inspired by the landscapes and tea culture of the Nilgiris.</p>
+        <p>Have a question about our tea, packet sizes or availability? Send us a WhatsApp message. We’ll be happy to help.</p>
+        <a class="button" href="#order">Talk to Hi-Tea</a>
+      </div>
+    </section>
+
+    <section class="why">
+      <p class="eyebrow">The Hi-Tea experience</p>
+      <h2 class="section-heading">Tea time, made simple</h2>
+      <div class="why-grid">
+        <div class="why-item"><strong>Inspired by the Nilgiris</strong><span>Our brand celebrates the tea heritage of the hills.</span></div>
+        <div class="why-item"><strong>Your choice of size</strong><span>Choose 250g, 500g or 1kg packets.</span></div>
+        <div class="why-item"><strong>Direct ordering</strong><span>Speak with us directly on WhatsApp before confirming.</span></div>
+      </div>
+    </section>
+
+    <section class="order-section" id="order">
+      <div class="order-layout">
+        <div class="order-copy">
+          <p class="eyebrow">We’d love to hear from you</p>
+          <h2>Place your order</h2>
+          <p>Fill in the details and tap the button. WhatsApp will open with your order summary ready to send. Your order is confirmed only after we reply and agree on price, availability and delivery.</p>
+          <p class="contact-line">WhatsApp: +91 94426 18911</p>
+          <p>Location: Kotagiri, The Nilgiris</p>
+        </div>
+
+        <form class="order-form" id="orderForm">
+          <div class="form-grid">
+            <div class="field full">
+              <label for="customerName">Your name *</label>
+              <input id="customerName" name="customerName" type="text" autocomplete="name" placeholder="Enter your name" required>
+            </div>
+            <div class="field">
+              <label for="customerPhone">Your phone number *</label>
+              <input id="customerPhone" name="customerPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="Your contact number" required>
+            </div>
+            <div class="field">
+              <label for="product">Choose tea *</label>
+              <select id="product" name="product" required>
+                <option value="Nilgiri Black Tea">Nilgiri Black Tea</option>
+                <option value="Premium Tea Powder">Premium Tea Powder</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="size">Packet size *</label>
+              <select id="size" name="size" required>
+                <option value="250g">250g</option>
+                <option value="500g">500g</option>
+                <option value="1kg">1kg</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="quantity">Number of packets *</label>
+              <input id="quantity" name="quantity" type="number" min="1" max="50" step="1" value="1" required>
+            </div>
+            <div class="field full">
+              <label for="address">Delivery address / city *</label>
+              <textarea id="address" name="address" placeholder="Enter your delivery address or city" required></textarea>
+            </div>
+            <div class="field full">
+              <label for="notes">Additional notes (optional)</label>
+              <textarea id="notes" name="notes" placeholder="Any delivery instructions or questions?"></textarea>
+            </div>
+          </div>
+          <button class="button" type="submit" style="width:100%">Send order through WhatsApp</button>
+          <p class="form-note">This opens WhatsApp with a message. Please press Send in WhatsApp to submit your request.</p>
+          <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>Hi-Tea</strong>
+    <p>The Taste of The Nilgiris</p>
+    <p>Kotagiri, The Nilgiris · WhatsApp: +91 94426 18911</p>
+    <p>© <span id="year"></span> Hi-Tea. All rights reserved.</p>
+  </footer>
+
+  <a class="floating-whatsapp" href="https://wa.me/919442618911?text=Hello%20Hi-Tea%2C%20I%27d%20like%20to%20know%20more%20about%20your%20tea." target="_blank" rel="noopener noreferrer" aria-label="Chat with Hi-Tea on WhatsApp">☏ WhatsApp</a>
+
+  <script>
+    // Hi-Tea WhatsApp number in international format, without + or spaces.
+    const WHATSAPP_NUMBER = "919442618911";
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+      menuToggle.textContent = isOpen ? "×" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    // Product-card buttons preselect the chosen tea in the order form.
+    document.querySelectorAll("[data-product]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.getElementById("product").value = button.dataset.product;
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.getElementById("orderForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const name = document.getElementById("customerName").value.trim();
+      const phone = document.getElementById("customerPhone").value.trim();
+      const product = document.getElementById("product").value;
+      const size = document.getElementById("size").value;
+      const quantity = document.getElementById("quantity").value;
+      const address = document.getElementById("address").value.trim();
+      const notes = document.getElementById("notes").value.trim();
+      const message = document.getElementById("formMessage");
+
+      if (!name || !phone || !address || !quantity || Number(quantity) < 1) {
+        message.textContent = "Please complete all required fields.";
+        return;
+      }
+
+      const orderLines = [
+        "Hello Hi-Tea! I would like to place an order.",
+        "",
+        "Name: " + name,
+        "Customer phone: " + phone,
+        "Product: " + product,
+        "Packet size: " + size,
+        "Number of packets: " + quantity,
+        "Delivery address / city: " + address,
+        notes ? "Additional notes: " + notes : "",
+        "",
+        "Please confirm the price, availability and delivery details."
+      ].filter(Boolean);
+
+      const whatsappUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(orderLines.join("\n"));
+      message.textContent = "Opening WhatsApp. Review your message and press Send to submit your order request.";
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>
